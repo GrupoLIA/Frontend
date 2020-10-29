@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:lia_frontend/app/constants.dart';
 import 'package:lia_frontend/app/locator.dart';
 import 'package:lia_frontend/app/router.gr.dart' as Router;
-import 'package:lia_frontend/ui/views/dumb_widgets/welcome/welcome_view.dart';
+import 'package:lia_frontend/ui/views/welcome/welcome_view.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 void main() {

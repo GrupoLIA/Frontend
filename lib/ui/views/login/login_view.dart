@@ -1,12 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:lia_frontend/ui/views/dumb_widgets/rounded_button/rounded_button_widget.dart';
+import 'package:lia_frontend/ui/views/login/login_viewmodel.dart';
+import 'package:stacked/stacked.dart';
+import 'package:stacked_hooks/stacked_hooks.dart';
 
 class LoginView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Im at login view baby"),
+    return ViewModelBuilder.nonReactive(
+      viewModelBuilder: () => LoginViewModel(),
+      builder: (context, model, child) => Scaffold(
+        appBar: AppBar(
+          title: Text("Im at login view baby"),
+        ),
+        body: _LoginForm(),
       ),
+    );
+  }
+}
+
+class _LoginForm extends HookViewModelWidget<LoginViewModel> {
+  _LoginForm({Key key}) : super(key: key, reactive: false);
+
+  @override
+  Widget buildViewModelWidget(BuildContext context, LoginViewModel model) {
+    var text = useTextEditingController();
+    return Column(
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        TextField(controller: text, onChanged: model.updateEmail),
+        TextField(
+          controller: text,
+          onChanged: model.updatePassword,
+          obscureText: true,
+        ),
+        RoundedButton(text: "Hola", press: () {}),
+        RoundedButton(text: "Chau", press: () {}),
+      ],
     );
   }
 }
