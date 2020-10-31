@@ -25,19 +25,19 @@ class _LoginForm extends HookViewModelWidget<LoginViewModel> {
 
   @override
   Widget buildViewModelWidget(BuildContext context, LoginViewModel model) {
-    var text = useTextEditingController();
+    var emailController = useTextEditingController();
+    var passwordController = useTextEditingController();
     return Column(
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        TextField(controller: text, onChanged: model.updateEmail),
+        TextField(controller: emailController, onChanged: model.updateEmail),
         TextField(
-          controller: text,
+          controller: passwordController,
           onChanged: model.updatePassword,
           obscureText: true,
         ),
-        RoundedButton(text: "Hola", press: () {}),
-        RoundedButton(text: "Chau", press: () {}),
+        RoundedButton(text: "SUBMIT", press: model.submit),
       ],
     );
   }
