@@ -28,16 +28,16 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.0
 
-  stacked:
-  stacked_hooks:
-  stacked_services:
+  stacked: ^1.7.6
+  stacked_hooks: ^0.1.3+1
+  stacked_services: ^0.5.4+5
 
-  auto_route:
-  injectable:
+  auto_route: ^0.6.9
+  injectable: ^1.0.5
 
-  get_it:
+  get_it: ^5.0.1
 
-  flutter_hooks:
+  flutter_hooks: ^0.14.1
 
   observable_ish:
 
@@ -48,6 +48,7 @@ dependencies:
   flutter_svg:
 
   device_preview:
+  flutter_secure_storage: ^3.3.5
 
 dev_dependencies:
   flutter_test:

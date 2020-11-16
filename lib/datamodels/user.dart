@@ -7,29 +7,28 @@ class User {
   List<String> favorites;
   List<Trade> trades;
 
-  User({this.id, this.email, this.telephones, this.favorites});
+  User({this.id, this.email, this.telephones, this.favorites, this.trades});
 
   User.fromJson(Map<String, dynamic> json) {
     this.telephones = List<String>();
     this.trades = List<Trade>();
-    this.id = json['_id'];
-    this.email = json['email'];
-    for (var telephone in json['telephones']) {
+    this.id = json['user']['_id'];
+    this.email = json['user']['email'];
+
+    for (var telephone in json['user']['telephones']) {
       this.telephones.add(telephone);
     }
-    for (var trade in json['trades']) {
+    for (var trade in json['user']['trades']) {
       trades.add(Trade.fromJson(trade));
     }
-
-    //favorites = json['data']['user']['favorites'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = Map<String, dynamic>();
-    data['id'] = this.id;
-    data['email'] = this.email;
-    data['telephones'] = this.telephones;
-    data['favorites'] = this.favorites;
+    data['user']['id'] = this.id;
+    data['user']['email'] = this.email;
+    data['user']['telephones'] = this.telephones;
+    data['user']['favorites'] = this.favorites;
   }
 
   @override

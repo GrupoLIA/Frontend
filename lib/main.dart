@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:lia_frontend/app/constants.dart';
 import 'package:lia_frontend/app/locator.dart';
 import 'package:lia_frontend/app/router.gr.dart' as Router;
+import 'package:lia_frontend/ui/views/test_screen/startup_view.dart';
 import 'package:lia_frontend/ui/views/welcome/welcome_view.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -18,10 +19,11 @@ class MyApp extends StatelessWidget {
       title: 'Aplicacion de oficios',
       onGenerateRoute: Router.Router().onGenerateRoute,
       navigatorKey: locator<NavigationService>().navigatorKey,
-      home: WelcomeView(),
       builder: DevicePreview.appBuilder,
       theme: ThemeData(
           primaryColor: kPrimaryColor, scaffoldBackgroundColor: Colors.white),
     );
   }
 }
+
+_decideMainPage() {}

@@ -12,7 +12,7 @@ class LoginView extends StatelessWidget {
       viewModelBuilder: () => LoginViewModel(),
       builder: (context, model, child) => Scaffold(
         appBar: AppBar(
-          title: Text("Im at login view baby"),
+          title: Text("Login View"),
         ),
         body: _LoginForm(),
       ),
