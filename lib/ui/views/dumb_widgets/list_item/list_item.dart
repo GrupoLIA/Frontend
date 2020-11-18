@@ -19,7 +19,7 @@ class ListItem extends StatelessWidget {
             ),
           ],
           borderRadius: BorderRadius.circular(5)),
-      child: email == LoadingIndicatorTitle
+      child: email == LoadingIndicatorEmail
           ? CircularProgressIndicator()
           : Text(email),
       alignment: Alignment.center,
