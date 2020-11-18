@@ -19,6 +19,7 @@ class StartupViewModel extends FutureViewModel<String> {
     if (res != null) {
       await _userService.initUserModel(res);
     }
+    print("JWT is $res");
     return res;
   }
 }

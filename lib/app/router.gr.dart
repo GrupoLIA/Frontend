@@ -9,21 +9,27 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
+import '../ui/views/details/details_view.dart';
 import '../ui/views/home/home_view.dart';
 import '../ui/views/login/login_view.dart';
 import '../ui/views/signup/signup_view.dart';
+import '../ui/views/startup/startup_view.dart';
 import '../ui/views/welcome/welcome_view.dart';
 
 class Routes {
-  static const String HomeViewRoute = '/home-view';
-  static const String WelcomeViewRoute = '/';
+  static const String StartupViewRoute = '/';
+  static const String WelcomeViewRoute = '/welcome-view';
   static const String LoginViewRoute = '/login-view';
   static const String SignupViewRoute = '/signup-view';
+  static const String HomeViewRoute = '/home-view';
+  static const String DetailsViewRoute = '/details-view';
   static const all = <String>{
-    HomeViewRoute,
+    StartupViewRoute,
     WelcomeViewRoute,
     LoginViewRoute,
     SignupViewRoute,
+    HomeViewRoute,
+    DetailsViewRoute,
   };
 }
 
@@ -31,17 +37,19 @@ class Router extends RouterBase {
   @override
   List<RouteDef> get routes => _routes;
   final _routes = <RouteDef>[
-    RouteDef(Routes.HomeViewRoute, page: HomeView),
+    RouteDef(Routes.StartupViewRoute, page: StartupView),
     RouteDef(Routes.WelcomeViewRoute, page: WelcomeView),
     RouteDef(Routes.LoginViewRoute, page: LoginView),
     RouteDef(Routes.SignupViewRoute, page: SignupView),
+    RouteDef(Routes.HomeViewRoute, page: HomeView),
+    RouteDef(Routes.DetailsViewRoute, page: DetailsView),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
   final _pagesMap = <Type, AutoRouteFactory>{
-    HomeView: (data) {
+    StartupView: (data) {
       return MaterialPageRoute<dynamic>(
-        builder: (context) => HomeView(),
+        builder: (context) => StartupView(),
         settings: data,
       );
     },
@@ -60,6 +68,18 @@ class Router extends RouterBase {
     SignupView: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => SignupView(),
+        settings: data,
+      );
+    },
+    HomeView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => HomeView(),
+        settings: data,
+      );
+    },
+    DetailsView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => DetailsView(),
         settings: data,
       );
     },

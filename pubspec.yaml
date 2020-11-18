@@ -40,7 +40,7 @@ dependencies:
   flutter_hooks: ^0.14.1
 
   observable_ish:
-
+  scrollable_positioned_list: ^0.1.8
   http:
 
   email_validator:

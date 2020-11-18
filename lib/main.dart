@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:lia_frontend/app/constants.dart';
 import 'package:lia_frontend/app/locator.dart';
 import 'package:lia_frontend/app/router.gr.dart' as Router;
-import 'package:lia_frontend/ui/views/test_screen/startup_view.dart';
-import 'package:lia_frontend/ui/views/welcome/welcome_view.dart';
+import 'package:lia_frontend/ui/views/startup/startup_view.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 void main() {
@@ -17,6 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Aplicacion de oficios',
+      debugShowCheckedModeBanner: false,
       onGenerateRoute: Router.Router().onGenerateRoute,
       navigatorKey: locator<NavigationService>().navigatorKey,
       builder: DevicePreview.appBuilder,

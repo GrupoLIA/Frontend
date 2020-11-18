@@ -3,22 +3,30 @@ import 'package:lia_frontend/datamodels/trade.dart';
 class User {
   String id;
   String email;
+  String profile_description;
   List<String> telephones;
   List<String> favorites;
   List<Trade> trades;
 
-  User({this.id, this.email, this.telephones, this.favorites, this.trades});
+  User(
+      {this.id,
+      this.email,
+      this.telephones,
+      this.profile_description,
+      this.favorites,
+      this.trades});
 
   User.fromJson(Map<String, dynamic> json) {
     this.telephones = List<String>();
     this.trades = List<Trade>();
-    this.id = json['user']['_id'];
-    this.email = json['user']['email'];
+    this.id = json['_id'];
+    this.profile_description = json['profile_description'];
+    this.email = json['email'];
 
-    for (var telephone in json['user']['telephones']) {
+    for (var telephone in json['telephones']) {
       this.telephones.add(telephone);
     }
-    for (var trade in json['user']['trades']) {
+    for (var trade in json['trades']) {
       trades.add(Trade.fromJson(trade));
     }
   }

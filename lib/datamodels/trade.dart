@@ -12,8 +12,8 @@ class Trade {
     this.reviewCount = json['review_count'];
     this.trade = json['trade'];
 
-    this.validationDate = DateTime.parse(json['validation_date']);
-    this.expiracyDate = DateTime.parse(json['expiracy_date']);
+    //this.validationDate = DateTime.parse(json['validation_date']);
+    //this.expiracyDate = DateTime.parse(json['expiracy_date']);
   }
 
   @override
