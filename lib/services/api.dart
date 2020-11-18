@@ -41,10 +41,15 @@ class Api {
     }
   }
 
-  Future<void> signup() async {}
-
-  Future<void> getUsers() async {
-    final response = await client.get('$endpoint/api/users');
+  Future<List<User>> getUsers({String trade, int skip, int limit}) async {
+    var users = List<User>();
+    var response = await client
+        .get('$endpoint/api/users?trade=$trade&skip=$skip&limit=$limit');
+    var parsed = json.decode(response.body)['data'] as List<dynamic>;
+    for (var user in parsed) {
+      users.add(User.fromJson(user));
+    }
+    return users;
   }
 
   Future<User> getUserProfile([String token]) async {
@@ -56,6 +61,6 @@ class Api {
     }
     var response = await client.get('$endpoint/api/users/profile',
         headers: <String, String>{'Authorization': 'Bearer $jwt'});
-    return User.fromJson(json.decode(response.body)['data']);
+    return User.fromJson(json.decode(response.body)['data']['user']);
   }
 }

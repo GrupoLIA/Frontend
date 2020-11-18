@@ -38,8 +38,10 @@ class WelcomeView extends StatelessWidget {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("WELCOME TO BRAUN-JOBSaaaaaa",
-                          style: TextStyle(fontWeight: FontWeight.bold)),
+                      Text("Welcome",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: kSecondaryColor)),
                       SizedBox(height: size.height * 0.05),
                       SvgPicture.asset(
                         "assets/icons/chat.svg",

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lia_frontend/ui/views/home/home_view.dart';
-import 'package:lia_frontend/ui/views/test_screen/startup_viewmodel.dart';
+import 'package:lia_frontend/ui/views/startup/startup_viewmodel.dart';
 import 'package:lia_frontend/ui/views/welcome/welcome_view.dart';
 import 'package:stacked/stacked.dart';
 
