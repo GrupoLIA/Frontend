@@ -48,7 +48,7 @@ class HomeViewModel extends FutureViewModel {
   }
 
   void _showLoadingIndicator() {
-    _items.add(new User(email: LoadingIndicatorTitle));
+    _items.add(new User(email: LoadingIndicatorEmail));
     notifyListeners();
   }
 
