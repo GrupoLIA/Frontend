@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lia_frontend/app/constants.dart';
 
 class ListItem extends StatelessWidget {
+  final String id;
   final String email;
   final String profileDescription;
   final String avatar;
@@ -11,6 +12,7 @@ class ListItem extends StatelessWidget {
 
   const ListItem(
       {Key key,
+      this.id,
       this.email,
       this.profileDescription,
       this.avatar,
@@ -24,7 +26,7 @@ class ListItem extends StatelessWidget {
       behavior: HitTestBehavior.translucent,
       onTap: () async {
         await onTapFunction(
-            email, profileDescription, avatar, reviewCount, totalRating);
+            id, email, profileDescription, avatar, reviewCount, totalRating);
       },
       child: Container(
         height: 100,
