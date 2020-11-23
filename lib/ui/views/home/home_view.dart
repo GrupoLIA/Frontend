@@ -45,7 +45,15 @@ class HomeView extends StatelessWidget {
                             model.handleItemCreated(index);
                           });
                         },
-                        child: ListItem(email: model.items[index].email),
+                        child: ListItem(
+                          email: model.items[index].email,
+                          profileDescription:
+                              model.items[index].profileDescription,
+                          avatar: model.items[index].avatar,
+                          totalRating: model.getTotalRating(index),
+                          reviewCount: model.getReviewCount(index),
+                          onTapFunction: model.navigateToDetails,
+                        ),
                       ),
                     ),
                   ),

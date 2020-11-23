@@ -6,6 +6,9 @@ class Trade {
   DateTime validationDate;
   DateTime expiracyDate;
 
+  int get getTotalRating => totalRating;
+  int get getReviewCount => reviewCount;
+
   Trade.fromJson(Map<String, dynamic> json) {
     this.id = json['_id'];
     this.totalRating = json['total_rating'];

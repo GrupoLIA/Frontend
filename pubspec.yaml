@@ -38,7 +38,6 @@ dependencies:
   get_it: ^5.0.1
 
   flutter_hooks: ^0.14.1
-
   observable_ish:
   scrollable_positioned_list: ^0.1.8
   http:
@@ -50,6 +49,7 @@ dependencies:
   device_preview:
   flutter_secure_storage: ^3.3.5
 
+  smooth_star_rating: 1.1.1
 dev_dependencies:
   flutter_test:
     sdk: flutter

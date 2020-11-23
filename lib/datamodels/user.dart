@@ -3,7 +3,8 @@ import 'package:lia_frontend/datamodels/trade.dart';
 class User {
   String id;
   String email;
-  String profile_description;
+  String profileDescription;
+  String avatar;
   List<String> telephones;
   List<String> favorites;
   List<Trade> trades;
@@ -12,7 +13,8 @@ class User {
       {this.id,
       this.email,
       this.telephones,
-      this.profile_description,
+      this.profileDescription,
+      this.avatar,
       this.favorites,
       this.trades});
 
@@ -20,7 +22,8 @@ class User {
     this.telephones = List<String>();
     this.trades = List<Trade>();
     this.id = json['_id'];
-    this.profile_description = json['profile_description'];
+    this.avatar = json['avatar'];
+    this.profileDescription = json['profile_description'];
     this.email = json['email'];
 
     for (var telephone in json['telephones']) {
