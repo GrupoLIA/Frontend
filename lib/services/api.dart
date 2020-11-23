@@ -41,10 +41,11 @@ class Api {
     }
   }
 
-  Future<List<User>> getUsers({String trade, int skip, int limit}) async {
+  Future<List<User>> getUsers(
+      {String email, String trade, int skip, int limit}) async {
     var users = List<User>();
-    var response = await client
-        .get('$endpoint/api/users?trade=$trade&skip=$skip&limit=$limit');
+    var response = await client.get(
+        '$endpoint/api/users?email=$email&trade=$trade&skip=$skip&limit=$limit');
     var parsed = json.decode(response.body)['data'] as List<dynamic>;
     for (var user in parsed) {
       users.add(User.fromJson(user));

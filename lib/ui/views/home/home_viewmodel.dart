@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:lia_frontend/app/constants.dart';
 import 'package:lia_frontend/app/locator.dart';
 import 'package:lia_frontend/app/router.gr.dart';
@@ -6,7 +5,6 @@ import 'package:lia_frontend/datamodels/user.dart';
 import 'package:lia_frontend/services/api.dart';
 import 'package:lia_frontend/services/authentication_service.dart';
 import 'package:lia_frontend/services/user_service.dart';
-import 'package:lia_frontend/ui/views/home/home_view.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -36,15 +34,32 @@ class HomeViewModel extends FutureViewModel {
       _currentPage = pageToRequest;
 
       _showLoadingIndicator();
+      await Future.delayed(Duration(seconds: 3));
       var newFetchedItems = await _api.getUsers(
+          // email: _userService.user.email,
           trade: _activeIndex.toLowerCase(),
           skip: ItemRequestThreshold * _currentPage,
           limit: ItemRequestThreshold);
 
       _items.addAll(newFetchedItems);
-
       _removeLoadingIndicator();
     }
+  }
+
+  int getTotalRating(int index) {
+    var trades = _items[index].trades;
+    if (trades == null) return 0;
+    var trade =
+        trades.firstWhere((value) => value.trade == _activeIndex.toLowerCase());
+    return trade.getTotalRating;
+  }
+
+  int getReviewCount(int index) {
+    var trades = _items[index].trades;
+    if (trades == null) return 0;
+    var trade =
+        trades.firstWhere((value) => value.trade == _activeIndex.toLowerCase());
+    return trade.getReviewCount;
   }
 
   void _showLoadingIndicator() {
@@ -70,13 +85,14 @@ class HomeViewModel extends FutureViewModel {
     return _userService.user.toString();
   }
 
-  void changeActiveCategory(String trade) async {
+  Future changeActiveCategory(String trade) async {
     if (_prevActiveIndex != trade) {
       _prevActiveIndex = trade;
       _activeIndex = trade;
       _currentPage = 0;
       _itemScrollController.jumpTo(index: 0);
       _items = await runBusyFuture(_api.getUsers(
+          // email: _userService.user.email,
           trade: _activeIndex.toLowerCase(),
           skip: ItemRequestThreshold * _currentPage,
           limit: ItemRequestThreshold));
@@ -84,9 +100,15 @@ class HomeViewModel extends FutureViewModel {
     }
   }
 
-  Future navigateToDetails(String email, String profileDescription) async {
-    await _navigationService.navigateTo(Routes.DetailsViewRoute,
-        arguments: {"email": email, "profileDescription": profileDescription});
+  Future navigateToDetails(String email, String profileDescription,
+      String avatar, int reviewCount, int totalRating) async {
+    await _navigationService.navigateTo(Routes.DetailsViewRoute, arguments: {
+      "email": email,
+      "profileDescription": profileDescription,
+      "avatar": avatar,
+      "reviewCount": reviewCount,
+      "totalRating": totalRating
+    });
   }
 
   void logoutUser() async {
@@ -99,6 +121,7 @@ class HomeViewModel extends FutureViewModel {
   Future futureToRun() async {
     print("FUTURE TO RUN");
     _items = await _api.getUsers(
+        // email: _userService.user.email,
         trade: _activeIndex.toLowerCase(),
         skip: ItemRequestThreshold * _currentPage,
         limit: ItemRequestThreshold);
