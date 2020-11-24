@@ -1,5 +1,7 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:injectable/injectable.dart';
+import 'package:lia_frontend/app/locator.dart';
+import 'package:lia_frontend/services/api.dart';
 
 @lazySingleton
 class AuthenticationService {

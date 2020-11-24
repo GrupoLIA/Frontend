@@ -34,15 +34,15 @@ class HomeViewModel extends FutureViewModel {
       _currentPage = pageToRequest;
 
       _showLoadingIndicator();
-      await Future.delayed(Duration(seconds: 3));
       var newFetchedItems = await _api.getUsers(
-          // email: _userService.user.email,
+          email: _userService.user.email,
           trade: _activeIndex.toLowerCase(),
           skip: ItemRequestThreshold * _currentPage,
           limit: ItemRequestThreshold);
-
+      await Future.delayed(Duration(seconds: 2));
       _items.addAll(newFetchedItems);
       _removeLoadingIndicator();
+      notifyListeners();
     }
   }
 
@@ -92,7 +92,7 @@ class HomeViewModel extends FutureViewModel {
       _currentPage = 0;
       _itemScrollController.jumpTo(index: 0);
       _items = await runBusyFuture(_api.getUsers(
-          // email: _userService.user.email,
+          email: _userService.user.email,
           trade: _activeIndex.toLowerCase(),
           skip: ItemRequestThreshold * _currentPage,
           limit: ItemRequestThreshold));
@@ -100,19 +100,26 @@ class HomeViewModel extends FutureViewModel {
     }
   }
 
-  Future navigateToDetails(String email, String profileDescription,
-      String avatar, int reviewCount, int totalRating) async {
+  Future navigateToDetails(
+      String employeeID,
+      String email,
+      String profileDescription,
+      String avatar,
+      int reviewCount,
+      int totalRating) async {
     await _navigationService.navigateTo(Routes.DetailsViewRoute, arguments: {
+      "employeeID": employeeID,
       "email": email,
       "profileDescription": profileDescription,
       "avatar": avatar,
       "reviewCount": reviewCount,
-      "totalRating": totalRating
+      "totalRating": totalRating,
+      "trade": _activeIndex.toLowerCase()
     });
   }
 
   void logoutUser() async {
-    await _api.logout(_authenticationService.jwt);
+    _api.logout(_authenticationService.jwt);
     await _authenticationService.deleteAll();
     await _navigationService.clearStackAndShow(Routes.WelcomeViewRoute);
   }
@@ -120,10 +127,13 @@ class HomeViewModel extends FutureViewModel {
   @override
   Future futureToRun() async {
     print("FUTURE TO RUN");
+    //await Future.delayed(Duration(seconds: 3));
     _items = await _api.getUsers(
-        // email: _userService.user.email,
+        email: _userService.user.email,
         trade: _activeIndex.toLowerCase(),
         skip: ItemRequestThreshold * _currentPage,
         limit: ItemRequestThreshold);
+    notifyListeners();
+    return _items;
   }
 }

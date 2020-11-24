@@ -64,4 +64,20 @@ class Api {
         headers: <String, String>{'Authorization': 'Bearer $jwt'});
     return User.fromJson(json.decode(response.body)['data']['user']);
   }
+
+  Future createContract(String employeeID, String trade) async {
+    var jwt = _authenticationService.jwt;
+    if (jwt == null) return;
+
+    var response = await client.post('$endpoint/api/contracts',
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $jwt'
+        },
+        body: jsonEncode(
+            <String, String>{'employee': employeeID, 'trade': trade}));
+    if (response.statusCode == 501) {
+      print("We lost boys");
+    }
+  }
 }

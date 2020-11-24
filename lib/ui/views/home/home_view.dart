@@ -32,7 +32,7 @@ class HomeView extends StatelessWidget {
                 ],
               ),
             ),
-            model.isBusy
+            model.isBusy || model.data == null
                 ? Expanded(child: Center(child: CircularProgressIndicator()))
                 : Expanded(
                     child: ScrollablePositionedList.builder(
@@ -46,6 +46,7 @@ class HomeView extends StatelessWidget {
                           });
                         },
                         child: ListItem(
+                          id: model.items[index].id,
                           email: model.items[index].email,
                           profileDescription:
                               model.items[index].profileDescription,

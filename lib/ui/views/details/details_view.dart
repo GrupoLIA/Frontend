@@ -42,23 +42,26 @@ class DetailsView extends StatelessWidget {
                       Text(args['profileDescription'],
                           style: TextStyle(height: 1.5)),
                       SizedBox(height: size.height * 0.1),
-                      Container(
-                        padding: EdgeInsets.all(20),
-                        width: size.width * 0.8,
-                        decoration: BoxDecoration(
-                            color: kPrimaryColor,
-                            borderRadius: BorderRadius.circular(10)),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SvgPicture.asset("assets/icons/bag.svg"),
-                            SizedBox(width: 10),
-                            Text("Contratalo Ya",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18))
-                          ],
+                      GestureDetector(
+                        onTap: () => model.showConfirmationDialog(),
+                        child: Container(
+                          padding: EdgeInsets.all(20),
+                          width: size.width * 0.8,
+                          decoration: BoxDecoration(
+                              color: kPrimaryColor,
+                              borderRadius: BorderRadius.circular(10)),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SvgPicture.asset("assets/icons/bag.svg"),
+                              SizedBox(width: 10),
+                              Text("Contratalo Ya",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18))
+                            ],
+                          ),
                         ),
                       ),
                     ],
@@ -67,7 +70,8 @@ class DetailsView extends StatelessWidget {
           ],
         ),
       ),
-      viewModelBuilder: () => DetailsViewModel(),
+      viewModelBuilder: () => DetailsViewModel(
+          employeeID: args['employeeID'], trade: args['trade']),
     );
   }
 

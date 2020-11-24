@@ -24,7 +24,7 @@ class LoginViewModel extends BaseViewModel {
 
   Future submit() async {
     await _api.login(_email, _password);
-    _userService.initUserModel();
+    await _userService.initUserModel();
     await _navigationService.navigateTo(Routes.HomeViewRoute);
   }
 }
