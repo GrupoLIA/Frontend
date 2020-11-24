@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lia_frontend/app/constants.dart';
+import 'package:lia_frontend/ui/views/dumb_widgets/already_have_an_account_check/already_have_an_account_check.dart';
 import 'package:lia_frontend/ui/views/dumb_widgets/rounded_button/rounded_button_widget.dart';
 import 'package:lia_frontend/ui/views/dumb_widgets/text_field_container/text_field_container_widget.dart';
 import 'package:lia_frontend/ui/views/login/login_viewmodel.dart';
@@ -49,23 +50,11 @@ class LoginView extends StatelessWidget {
                       "assets/icons/login.svg",
                       height: size.height * 0.35,
                     ),
-                    TextFieldContainer(size: size, child: EmailForm()),
-                    TextFieldContainer(size: size, child: PasswordForm()),
+                    TextFieldContainer(size: size, child: LoginViewEmailForm()),
+                    TextFieldContainer(
+                        size: size, child: LoginViewPasswordForm()),
                     RoundedButton(text: "LOGIN", press: model.submit),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text("¿No tenés una cuenta? "),
-                        GestureDetector(
-                          child: Text(
-                            "Registrate",
-                            style: TextStyle(
-                                color: kPrimaryColor,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        )
-                      ],
-                    )
+                    AlreadyHaveAnAccountCheck()
                   ],
                 ),
               )
@@ -77,7 +66,7 @@ class LoginView extends StatelessWidget {
   }
 }
 
-class EmailForm extends HookViewModelWidget<LoginViewModel> {
+class LoginViewEmailForm extends HookViewModelWidget<LoginViewModel> {
   @override
   Widget buildViewModelWidget(BuildContext context, LoginViewModel model) {
     var emailController = useTextEditingController();
@@ -92,7 +81,7 @@ class EmailForm extends HookViewModelWidget<LoginViewModel> {
   }
 }
 
-class PasswordForm extends HookViewModelWidget<LoginViewModel> {
+class LoginViewPasswordForm extends HookViewModelWidget<LoginViewModel> {
   @override
   Widget buildViewModelWidget(BuildContext context, LoginViewModel model) {
     var passwordController = useTextEditingController();
