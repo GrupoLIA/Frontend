@@ -34,15 +34,15 @@ class HomeViewModel extends FutureViewModel {
       _currentPage = pageToRequest;
 
       _showLoadingIndicator();
-      await Future.delayed(Duration(seconds: 3));
       var newFetchedItems = await _api.getUsers(
           email: _userService.user.email,
           trade: _activeIndex.toLowerCase(),
           skip: ItemRequestThreshold * _currentPage,
           limit: ItemRequestThreshold);
-
+      await Future.delayed(Duration(seconds: 2));
       _items.addAll(newFetchedItems);
       _removeLoadingIndicator();
+      notifyListeners();
     }
   }
 
@@ -127,10 +127,13 @@ class HomeViewModel extends FutureViewModel {
   @override
   Future futureToRun() async {
     print("FUTURE TO RUN");
+    //await Future.delayed(Duration(seconds: 3));
     _items = await _api.getUsers(
         email: _userService.user.email,
         trade: _activeIndex.toLowerCase(),
         skip: ItemRequestThreshold * _currentPage,
         limit: ItemRequestThreshold);
+    notifyListeners();
+    return _items;
   }
 }
