@@ -31,6 +31,22 @@ class Api {
     }
   }
 
+  Future<dynamic> signup(String email, String password) async {
+    final response = await client.post('$endpoint/api/users/signup',
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+        },
+        body:
+            jsonEncode(<String, String>{'email': email, 'password': password}));
+
+    if (response.statusCode == 201) {
+      var decodedJson = json.decode(response.body);
+      await _authenticationService.writeInStorage(decodedJson['data']['token']);
+    } else {
+      throw Exception('Failed to create user');
+    }
+  }
+
   Future<dynamic> logout(String jwt) async {
     final response = await client.post("$endpoint/api/users/logout",
         headers: <String, String>{'Authorization': 'Bearer $jwt'});
