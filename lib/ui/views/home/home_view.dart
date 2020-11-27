@@ -3,7 +3,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lia_frontend/app/constants.dart';
 import 'package:lia_frontend/ui/views/dumb_widgets/home_appbar/home_appbar_widget.dart';
-import 'package:lia_frontend/ui/views/dumb_widgets/list_item/list_item.dart';
+import 'package:lia_frontend/ui/views/dumb_widgets/user_list_item/user_list_item.dart';
 import 'package:lia_frontend/ui/views/home/home_viewmodel.dart';
 import 'package:lia_frontend/ui/views/smart_widgets/creation_aware_list_item/creation_aware_list_item.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
@@ -45,7 +45,7 @@ class HomeView extends StatelessWidget {
                             model.handleItemCreated(index);
                           });
                         },
-                        child: ListItem(
+                        child: UserListItem(
                           id: model.items[index].id,
                           email: model.items[index].email,
                           profileDescription:
@@ -60,6 +60,27 @@ class HomeView extends StatelessWidget {
                   ),
           ],
         ),
+        drawer: Drawer(
+            child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            DrawerHeader(
+              child: Text(""),
+              decoration: BoxDecoration(color: kPrimaryColor),
+            ),
+            if (model.userIsEmployee())
+              ListTile(
+                  title: Text("Mostrar ofertas recibidas"),
+                  onTap: model.showReceivedContracts),
+            ListTile(
+                title: Text("Mostrar contratos creados"),
+                onTap: model.showCreatedContracts),
+            ListTile(
+              title: Text("Logout"),
+              onTap: model.logoutUser,
+            ),
+          ],
+        )),
       ),
       viewModelBuilder: () => HomeViewModel(),
     );

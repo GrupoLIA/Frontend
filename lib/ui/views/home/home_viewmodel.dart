@@ -124,6 +124,19 @@ class HomeViewModel extends FutureViewModel {
     await _navigationService.clearStackAndShow(Routes.WelcomeViewRoute);
   }
 
+  bool userIsEmployee() {
+    return _userService.user.trades?.isNotEmpty;
+  }
+
+  void showReceivedContracts() async {
+    await _navigationService.navigateTo(Routes.ContractsReceivedViewRoute, arguments: {"isEmployee" : true});
+  }
+
+  void showCreatedContracts() async {
+    await _navigationService.navigateTo(Routes.ContractsCreatedViewRoute,
+        arguments: {"isEmployee": false});
+  }
+
   @override
   Future futureToRun() async {
     print("FUTURE TO RUN");

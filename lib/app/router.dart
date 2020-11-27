@@ -1,4 +1,6 @@
 import 'package:auto_route/auto_route_annotations.dart';
+import 'package:lia_frontend/ui/views/contracts/contracts_created/contracts_created_view.dart';
+import 'package:lia_frontend/ui/views/contracts/contracts_received/contracts_received_view.dart';
 import 'package:lia_frontend/ui/views/details/details_view.dart';
 import 'package:lia_frontend/ui/views/home/home_view.dart';
 import 'package:lia_frontend/ui/views/login/login_view.dart';
@@ -14,6 +16,10 @@ import 'package:lia_frontend/ui/views/welcome/welcome_view.dart';
     MaterialRoute(page: SignupView, name: "SignupViewRoute"),
     MaterialRoute(page: HomeView, name: "HomeViewRoute"),
     MaterialRoute(page: DetailsView, name: "DetailsViewRoute"),
+    MaterialRoute(
+        page: ContractsCreatedView, name: "ContractsCreatedViewRoute"),
+    MaterialRoute(
+        page: ContractsReceivedView, name: "ContractsReceivedViewRoute"),
   ],
 )
 class $Router {}

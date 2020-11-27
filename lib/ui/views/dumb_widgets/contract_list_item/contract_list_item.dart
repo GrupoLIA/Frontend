@@ -1,33 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:lia_frontend/app/constants.dart';
 
-class ListItem extends StatelessWidget {
+class ContractListItem extends StatelessWidget {
   final String id;
-  final String email;
-  final String profileDescription;
-  final String avatar;
-  final int reviewCount;
-  final int totalRating;
+  final String status;
+  final bool hasReview;
+  final String employer;
+  final String employee;
+  final String trade;
   final Function onTapFunction;
 
-  const ListItem(
+  const ContractListItem(
       {Key key,
       this.id,
-      this.email,
-      this.profileDescription,
-      this.avatar,
-      this.onTapFunction,
-      this.reviewCount,
-      this.totalRating});
+      this.status,
+      this.hasReview,
+      this.employer,
+      this.employee,
+      this.trade,
+      this.onTapFunction})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
-      onTap: () async {
-        await onTapFunction(
-            id, email, profileDescription, avatar, reviewCount, totalRating);
-      },
       child: Container(
         height: 100,
         margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
@@ -40,9 +37,9 @@ class ListItem extends StatelessWidget {
               ),
             ],
             borderRadius: BorderRadius.circular(5)),
-        child: email == LoadingIndicatorEmail
+        child: id == LoadingIndicatorID
             ? CircularProgressIndicator()
-            : Text(email),
+            : Text(trade),
         alignment: Alignment.center,
       ),
     );

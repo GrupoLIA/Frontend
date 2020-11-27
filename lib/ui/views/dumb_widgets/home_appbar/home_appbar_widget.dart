@@ -7,9 +7,12 @@ AppBar homeAppBar(BuildContext context) {
     centerTitle: true,
     backgroundColor: Colors.white,
     elevation: 0,
-    leading: IconButton(
-      icon: SvgPicture.asset("assets/icons/menu.svg"),
-      onPressed: () {},
+    leading: Builder(
+      builder: (context) => IconButton(
+          icon: SvgPicture.asset("assets/icons/menu.svg"),
+          onPressed: () {
+            return Scaffold.of(context).openDrawer();
+          }),
     ),
     title: RichText(
       text: TextSpan(

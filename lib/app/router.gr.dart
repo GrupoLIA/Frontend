@@ -9,6 +9,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
+import '../ui/views/contracts/contracts_created/contracts_created_view.dart';
+import '../ui/views/contracts/contracts_received/contracts_received_view.dart';
 import '../ui/views/details/details_view.dart';
 import '../ui/views/home/home_view.dart';
 import '../ui/views/login/login_view.dart';
@@ -23,6 +25,8 @@ class Routes {
   static const String SignupViewRoute = '/signup-view';
   static const String HomeViewRoute = '/home-view';
   static const String DetailsViewRoute = '/details-view';
+  static const String ContractsCreatedViewRoute = '/contracts-created-view';
+  static const String ContractsReceivedViewRoute = '/contracts-received-view';
   static const all = <String>{
     StartupViewRoute,
     WelcomeViewRoute,
@@ -30,6 +34,8 @@ class Routes {
     SignupViewRoute,
     HomeViewRoute,
     DetailsViewRoute,
+    ContractsCreatedViewRoute,
+    ContractsReceivedViewRoute,
   };
 }
 
@@ -43,6 +49,8 @@ class Router extends RouterBase {
     RouteDef(Routes.SignupViewRoute, page: SignupView),
     RouteDef(Routes.HomeViewRoute, page: HomeView),
     RouteDef(Routes.DetailsViewRoute, page: DetailsView),
+    RouteDef(Routes.ContractsCreatedViewRoute, page: ContractsCreatedView),
+    RouteDef(Routes.ContractsReceivedViewRoute, page: ContractsReceivedView),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -80,6 +88,18 @@ class Router extends RouterBase {
     DetailsView: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => DetailsView(),
+        settings: data,
+      );
+    },
+    ContractsCreatedView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => ContractsCreatedView(),
+        settings: data,
+      );
+    },
+    ContractsReceivedView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => ContractsReceivedView(),
         settings: data,
       );
     },
