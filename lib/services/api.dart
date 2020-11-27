@@ -2,6 +2,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import 'package:injectable/injectable.dart';
+import 'package:lia_frontend/datamodels/contract.dart';
 import 'package:lia_frontend/datamodels/user.dart';
 import 'package:lia_frontend/app/locator.dart';
 import 'package:lia_frontend/services/authentication_service.dart';
@@ -95,5 +96,78 @@ class Api {
     if (response.statusCode == 501) {
       print("We lost boys");
     }
+  }
+
+  Future<List<Contract>> getContracts(
+      {bool isEmployee, int limit, int skip}) async {
+    var jwt = _authenticationService.jwt;
+    if (jwt == null) return [];
+
+    var _endpointString =
+        '$endpoint/api/contracts${isEmployee ? '?isEmployee=true' : ''}';
+    print("LA endpoint string es: $_endpointString");
+
+    var response = await client.get(
+      _endpointString,
+      headers: <String, String>{
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $jwt'
+      },
+    );
+    if (response.statusCode == 200) {
+      List<Contract> contracts = List<Contract>();
+
+      var parsed =
+          (json.decode(response.body)['data']['contracts']) as List<dynamic>;
+      print("PARSED");
+      print(parsed);
+      for (var contract in parsed) {
+        contracts.add(Contract.fromJson(contract));
+      }
+      return contracts;
+    } else {
+      print("We lost boys");
+    }
+  }
+
+  Future<void> acceptContract(String contractID) async {
+    var jwt = _authenticationService.jwt;
+    if (jwt == null) return;
+
+    var response = await client.patch(
+      '$endpoint/api/contracts/$contractID',
+      headers: <String, String>{
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $jwt'
+      },
+    );
+    if (response.statusCode == 200) {
+      print("Se aceptó el contrato");
+    } else {
+      print("Fallo en aceptarse el contrato");
+    }
+  }
+
+  Future<String> createReview(String contractID, String title,
+      String description, double rating) async {
+    var res = "";
+    var jwt = _authenticationService.jwt;
+    if (jwt == null) res = "Internal Error";
+
+    var response = await client.post('$endpoint/api/reviews/$contractID',
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $jwt'
+        },
+        body: jsonEncode(
+            {'title': title, 'description': description, 'rating': rating}));
+
+    print(response.body);
+    if (response.statusCode == 200) {
+      res = "Review created successfully!";
+    } else {
+      res = json.decode(response.body)['error'];
+    }
+    return res;
   }
 }

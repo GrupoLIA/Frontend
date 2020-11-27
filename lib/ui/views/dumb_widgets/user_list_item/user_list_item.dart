@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:lia_frontend/app/constants.dart';
 
-class ListItem extends StatelessWidget {
+class UserListItem extends StatelessWidget {
   final String id;
   final String email;
   final String profileDescription;
   final String avatar;
   final int reviewCount;
-  final int totalRating;
+  final dynamic totalRating;
   final Function onTapFunction;
 
-  const ListItem(
+  const UserListItem(
       {Key key,
       this.id,
       this.email,

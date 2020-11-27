@@ -1,12 +1,12 @@
 class Trade {
   String id;
-  int totalRating;
+  dynamic totalRating;
   int reviewCount;
   String trade;
   DateTime validationDate;
   DateTime expiracyDate;
 
-  int get getTotalRating => totalRating;
+  dynamic get getTotalRating => totalRating;
   int get getReviewCount => reviewCount;
 
   Trade.fromJson(Map<String, dynamic> json) {

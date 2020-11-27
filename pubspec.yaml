@@ -50,6 +50,8 @@ dependencies:
   flutter_secure_storage: ^3.3.5
 
   smooth_star_rating: 1.1.1
+  fluttertoast:
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
