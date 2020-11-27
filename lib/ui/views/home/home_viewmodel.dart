@@ -46,7 +46,7 @@ class HomeViewModel extends FutureViewModel {
     }
   }
 
-  int getTotalRating(int index) {
+  dynamic getTotalRating(int index) {
     var trades = _items[index].trades;
     if (trades == null) return 0;
     var trade =
@@ -106,7 +106,7 @@ class HomeViewModel extends FutureViewModel {
       String profileDescription,
       String avatar,
       int reviewCount,
-      int totalRating) async {
+      dynamic totalRating) async {
     await _navigationService.navigateTo(Routes.DetailsViewRoute, arguments: {
       "employeeID": employeeID,
       "email": email,
@@ -129,7 +129,8 @@ class HomeViewModel extends FutureViewModel {
   }
 
   void showReceivedContracts() async {
-    await _navigationService.navigateTo(Routes.ContractsReceivedViewRoute, arguments: {"isEmployee" : true});
+    await _navigationService.navigateTo(Routes.ContractsReceivedViewRoute,
+        arguments: {"isEmployee": true});
   }
 
   void showCreatedContracts() async {

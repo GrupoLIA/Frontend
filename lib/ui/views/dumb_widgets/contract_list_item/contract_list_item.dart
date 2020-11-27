@@ -23,25 +23,52 @@ class ContractListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      behavior: HitTestBehavior.translucent,
-      child: Container(
-        height: 100,
-        margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-        decoration: BoxDecoration(
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                blurRadius: 16,
-                color: Colors.grey[400],
-              ),
-            ],
-            borderRadius: BorderRadius.circular(5)),
-        child: id == LoadingIndicatorID
-            ? CircularProgressIndicator()
-            : Text(trade),
-        alignment: Alignment.center,
-      ),
+    return onTapFunction != null
+        ? GestureDetector(
+            onTap: () => onTapFunction(this.id),
+            behavior: HitTestBehavior.translucent,
+            child: InnerTile(id: id, trade: trade, status: status),
+          )
+        : InnerTile(id: id, trade: trade, status: status);
+  }
+}
+
+class InnerTile extends StatelessWidget {
+  const InnerTile({
+    Key key,
+    @required this.id,
+    @required this.trade,
+    @required this.status,
+  }) : super(key: key);
+
+  final String id;
+  final String trade;
+  final String status;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 100,
+      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+      decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              blurRadius: 16,
+              color: Colors.grey[400],
+            ),
+          ],
+          borderRadius: BorderRadius.circular(5)),
+      child: id == LoadingIndicatorID
+          ? CircularProgressIndicator()
+          : Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("Se requiere $trade"),
+                Text("El estado del contrato es $status"),
+              ],
+            ),
+      alignment: Alignment.center,
     );
   }
 }

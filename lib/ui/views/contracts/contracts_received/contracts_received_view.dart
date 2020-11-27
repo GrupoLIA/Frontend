@@ -37,7 +37,9 @@ class ContractsReceivedView extends StatelessWidget {
                           trade: model.items[index].trade,
                           employee: model.items[index].employee,
                           employer: model.items[index].employer,
-                          onTapFunction: () {},
+                          onTapFunction: model.items[index].status == "pending"
+                              ? model.showAcceptContractConfirmationDialog
+                              : null,
                         ),
                       ),
                     ),

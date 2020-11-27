@@ -129,4 +129,45 @@ class Api {
       print("We lost boys");
     }
   }
+
+  Future<void> acceptContract(String contractID) async {
+    var jwt = _authenticationService.jwt;
+    if (jwt == null) return;
+
+    var response = await client.patch(
+      '$endpoint/api/contracts/$contractID',
+      headers: <String, String>{
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $jwt'
+      },
+    );
+    if (response.statusCode == 200) {
+      print("Se aceptó el contrato");
+    } else {
+      print("Fallo en aceptarse el contrato");
+    }
+  }
+
+  Future<String> createReview(String contractID, String title,
+      String description, double rating) async {
+    var res = "";
+    var jwt = _authenticationService.jwt;
+    if (jwt == null) res = "Internal Error";
+
+    var response = await client.post('$endpoint/api/reviews/$contractID',
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $jwt'
+        },
+        body: jsonEncode(
+            {'title': title, 'description': description, 'rating': rating}));
+
+    print(response.body);
+    if (response.statusCode == 200) {
+      res = "Review created successfully!";
+    } else {
+      res = json.decode(response.body)['error'];
+    }
+    return res;
+  }
 }

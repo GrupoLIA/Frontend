@@ -7,7 +7,7 @@ class UserListItem extends StatelessWidget {
   final String profileDescription;
   final String avatar;
   final int reviewCount;
-  final int totalRating;
+  final dynamic totalRating;
   final Function onTapFunction;
 
   const UserListItem(

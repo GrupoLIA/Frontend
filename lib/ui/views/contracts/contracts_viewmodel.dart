@@ -1,9 +1,11 @@
 import 'package:lia_frontend/app/constants.dart';
 import 'package:lia_frontend/app/locator.dart';
+import 'package:lia_frontend/app/router.gr.dart';
 import 'package:lia_frontend/datamodels/contract.dart';
 import 'package:lia_frontend/services/api.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 class ContractsViewModel extends FutureViewModel {
   /*TODO: Infinite scrolling is not done in the backend but is configured to work here.
@@ -11,6 +13,8 @@ class ContractsViewModel extends FutureViewModel {
   */
 
   final Api _api = locator<Api>();
+  final NavigationService _navigationService = locator<NavigationService>();
+  final DialogService _dialogService = locator<DialogService>();
   final bool isEmployee;
   List<Contract> _items;
 
@@ -52,6 +56,35 @@ class ContractsViewModel extends FutureViewModel {
   void _removeLoadingIndicator() {
     _items.removeAt(ItemRequestThreshold * _currentPage);
     notifyListeners();
+  }
+
+  Future showAcceptContractConfirmationDialog(String contractID) async {
+    DialogResponse response = await _dialogService.showConfirmationDialog(
+      title: "Aceptar contrato",
+      description: "¿Seguro desea aceptar este contrato?",
+      confirmationTitle: "Yes",
+      cancelTitle: "No",
+    );
+    var _confirmationResult = response?.confirmed;
+
+    if (_confirmationResult) {
+      await _api.acceptContract(contractID);
+    }
+  }
+
+  Future showCreateReviewConfirmationDialog(String contractID) async {
+    DialogResponse response = await _dialogService.showConfirmationDialog(
+      title: "Crear review",
+      description: "¿Seguro desea crear una review?",
+      confirmationTitle: "Si",
+      cancelTitle: "No",
+    );
+    var _confirmationResult = response?.confirmed;
+
+    if (_confirmationResult) {
+      await _navigationService.navigateTo(Routes.CreateReviewViewRoute,
+          arguments: {"contractID": contractID});
+    }
   }
 
   @override

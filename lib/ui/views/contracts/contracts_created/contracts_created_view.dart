@@ -37,7 +37,9 @@ class ContractsCreatedView extends StatelessWidget {
                           trade: model.items[index].trade,
                           employee: model.items[index].employee,
                           employer: model.items[index].employer,
-                          onTapFunction: () {},
+                          onTapFunction: model.items[index].status == 'finished'
+                              ? model.showCreateReviewConfirmationDialog
+                              : null,
                         ),
                       ),
                     ),
