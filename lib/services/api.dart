@@ -27,7 +27,6 @@ class Api {
       //le puse un await
 
     } else {
-      //TODO: Show a toast or some sort of Alert indicating either email or password are incorrect.
       throw Exception('Failed to login user');
     }
   }
@@ -53,7 +52,6 @@ class Api {
         headers: <String, String>{'Authorization': 'Bearer $jwt'});
 
     if (response.statusCode != 200) {
-      //TODO: Show a toast or some sort of Alert indicating either email or password are incorrect.
       throw Exception('Failed to logout');
     }
   }
@@ -101,7 +99,7 @@ class Api {
   Future<List<Contract>> getContracts(
       {bool isEmployee, int limit, int skip}) async {
     var jwt = _authenticationService.jwt;
-    if (jwt == null) return [];
+    if (jwt == null) throw Exception("Permission denied. Please authenticate!");
 
     var _endpointString =
         '$endpoint/api/contracts${isEmployee ? '?isEmployee=true' : ''}';
@@ -126,7 +124,7 @@ class Api {
       }
       return contracts;
     } else {
-      print("We lost boys");
+      return [];
     }
   }
 

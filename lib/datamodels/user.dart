@@ -40,6 +40,7 @@ class User {
     data['user']['email'] = this.email;
     data['user']['telephones'] = this.telephones;
     data['user']['favorites'] = this.favorites;
+    return data;
   }
 
   @override

@@ -8,10 +8,6 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 class ContractsViewModel extends FutureViewModel {
-  /*TODO: Infinite scrolling is not done in the backend but is configured to work here.
-          Just have to change the API service.
-  */
-
   final Api _api = locator<Api>();
   final NavigationService _navigationService = locator<NavigationService>();
   final DialogService _dialogService = locator<DialogService>();

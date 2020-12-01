@@ -1,6 +1,5 @@
 import 'package:lia_frontend/app/locator.dart';
 import 'package:lia_frontend/services/api.dart';
-import 'package:lia_frontend/services/user_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -10,7 +9,6 @@ class DetailsViewModel extends BaseViewModel {
   final Api _api = locator<Api>();
   final NavigationService _navigationService = locator<NavigationService>();
   final DialogService _dialogService = locator<DialogService>();
-  final UserService _userService = locator<UserService>();
 
   DetailsViewModel({this.employeeID, this.trade});
 

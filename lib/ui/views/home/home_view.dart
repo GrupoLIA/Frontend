@@ -130,7 +130,6 @@ class CategoryItem extends ViewModelWidget<HomeViewModel> {
 }
 
 class SearchBox extends ViewModelWidget<HomeViewModel> {
-  //TODO: Add a textfield controller most likely
   const SearchBox({
     Key key,
   }) : super(key: key);
