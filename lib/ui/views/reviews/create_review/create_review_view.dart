@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:lia_frontend/app/constants.dart';
 import 'package:lia_frontend/ui/views/dumb_widgets/rounded_button/rounded_button_widget.dart';
 import 'package:lia_frontend/ui/views/reviews/create_review/create_review_viewmodel.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';

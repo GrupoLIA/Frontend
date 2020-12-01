@@ -7,7 +7,6 @@ import 'package:lia_frontend/ui/views/dumb_widgets/orb_divider/orb_divider.dart'
 import 'package:lia_frontend/ui/views/dumb_widgets/rounded_button/rounded_button_widget.dart';
 import 'package:lia_frontend/ui/views/dumb_widgets/socal_icon/socal_icon.dart';
 import 'package:lia_frontend/ui/views/dumb_widgets/text_field_container/text_field_container_widget.dart';
-import 'package:lia_frontend/ui/views/login/login_view.dart';
 import 'package:lia_frontend/ui/views/signup/signup_viewmodel.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';

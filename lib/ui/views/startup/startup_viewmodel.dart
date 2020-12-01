@@ -1,9 +1,7 @@
 import 'package:lia_frontend/app/locator.dart';
-import 'package:lia_frontend/app/router.gr.dart';
 import 'package:lia_frontend/services/authentication_service.dart';
 import 'package:lia_frontend/services/user_service.dart';
 import 'package:stacked/stacked.dart';
-import 'package:stacked_services/stacked_services.dart';
 
 class StartupViewModel extends FutureViewModel<String> {
   AuthenticationService _authenticationService =
