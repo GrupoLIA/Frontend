@@ -8,6 +8,7 @@ import 'package:lia_frontend/ui/views/reviews/create_review/create_review_view.d
 import 'package:lia_frontend/ui/views/signup/signup_view.dart';
 import 'package:lia_frontend/ui/views/startup/startup_view.dart';
 import 'package:lia_frontend/ui/views/welcome/welcome_view.dart';
+import 'package:lia_frontend/ui/views/reviews/show_review/show_review_view.dart';
 
 @MaterialAutoRouter(
   routes: <AutoRoute>[
@@ -22,6 +23,7 @@ import 'package:lia_frontend/ui/views/welcome/welcome_view.dart';
     MaterialRoute(
         page: ContractsReceivedView, name: "ContractsReceivedViewRoute"),
     MaterialRoute(page: CreateReviewView, name: "CreateReviewViewRoute"),
+    MaterialRoute(page: ShowReviewView, name: "ShowReviewViewRoute"),
   ],
 )
 class $Router {}

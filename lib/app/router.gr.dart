@@ -15,6 +15,7 @@ import '../ui/views/details/details_view.dart';
 import '../ui/views/home/home_view.dart';
 import '../ui/views/login/login_view.dart';
 import '../ui/views/reviews/create_review/create_review_view.dart';
+import '../ui/views/reviews/show_review/show_review_view.dart';
 import '../ui/views/signup/signup_view.dart';
 import '../ui/views/startup/startup_view.dart';
 import '../ui/views/welcome/welcome_view.dart';
@@ -29,6 +30,7 @@ class Routes {
   static const String ContractsCreatedViewRoute = '/contracts-created-view';
   static const String ContractsReceivedViewRoute = '/contracts-received-view';
   static const String CreateReviewViewRoute = '/create-review-view';
+  static const String ShowReviewViewRoute = '/show-review-view';
   static const all = <String>{
     StartupViewRoute,
     WelcomeViewRoute,
@@ -39,6 +41,7 @@ class Routes {
     ContractsCreatedViewRoute,
     ContractsReceivedViewRoute,
     CreateReviewViewRoute,
+    ShowReviewViewRoute,
   };
 }
 
@@ -55,6 +58,7 @@ class Router extends RouterBase {
     RouteDef(Routes.ContractsCreatedViewRoute, page: ContractsCreatedView),
     RouteDef(Routes.ContractsReceivedViewRoute, page: ContractsReceivedView),
     RouteDef(Routes.CreateReviewViewRoute, page: CreateReviewView),
+    RouteDef(Routes.ShowReviewViewRoute, page: ShowReviewView),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -110,6 +114,12 @@ class Router extends RouterBase {
     CreateReviewView: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => CreateReviewView(),
+        settings: data,
+      );
+    },
+    ShowReviewView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => ShowReviewView(),
         settings: data,
       );
     },

@@ -22,6 +22,8 @@ class DetailsViewModel extends BaseViewModel {
     var _confirmationResult = response?.confirmed;
 
     if (_confirmationResult) {
+      print(employeeID);
+      print(trade);
       await _api.createContract(employeeID, trade);
     }
   }

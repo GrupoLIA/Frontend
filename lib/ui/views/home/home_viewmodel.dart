@@ -138,6 +138,10 @@ class HomeViewModel extends FutureViewModel {
         arguments: {"isEmployee": false});
   }
 
+  void showReviews() async {
+    await _navigationService.navigateTo(Routes.ShowReviewViewRoute);
+  }
+
   @override
   Future futureToRun() async {
     print("FUTURE TO RUN");

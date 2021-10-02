@@ -75,6 +75,7 @@ class HomeView extends StatelessWidget {
             ListTile(
                 title: Text("Mostrar contratos creados"),
                 onTap: model.showCreatedContracts),
+            ListTile(title: Text("Mostrar reviews"), onTap: model.showReviews),
             ListTile(
               title: Text("Logout"),
               onTap: model.logoutUser,

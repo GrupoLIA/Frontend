@@ -3,15 +3,17 @@ import 'dart:convert';
 
 import 'package:injectable/injectable.dart';
 import 'package:lia_frontend/datamodels/contract.dart';
+import 'package:lia_frontend/datamodels/review.dart';
 import 'package:lia_frontend/datamodels/user.dart';
 import 'package:lia_frontend/app/locator.dart';
 import 'package:lia_frontend/services/authentication_service.dart';
+import 'package:lia_frontend/services/user_service.dart';
 
 @lazySingleton
 class Api {
   AuthenticationService _authenticationService =
       locator<AuthenticationService>();
-  static const String endpoint = "http://10.0.2.2:3000";
+  static const String endpoint = "http://10.0.2.2:3002";
   var client = http.Client();
 
   Future<dynamic> login(String email, String password) async {
@@ -38,7 +40,7 @@ class Api {
         },
         body:
             jsonEncode(<String, String>{'email': email, 'password': password}));
-
+    print(response.statusCode);
     if (response.statusCode == 201) {
       var decodedJson = json.decode(response.body);
       await _authenticationService.writeInStorage(decodedJson['data']['token']);
@@ -89,8 +91,12 @@ class Api {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $jwt'
         },
-        body: jsonEncode(
-            <String, String>{'employee': employeeID, 'trade': trade}));
+        body: jsonEncode(<String, String>{
+          'employee': employeeID,
+          'trade': trade,
+          'description': 'Necesito el trabajo'
+        }));
+
     if (response.statusCode == 501) {
       print("We lost boys");
     }
@@ -103,7 +109,6 @@ class Api {
 
     var _endpointString =
         '$endpoint/api/contracts${isEmployee ? '?isEmployee=true' : ''}';
-    print("LA endpoint string es: $_endpointString");
 
     var response = await client.get(
       _endpointString,
@@ -167,5 +172,31 @@ class Api {
       res = json.decode(response.body)['error'];
     }
     return res;
+  }
+
+  Future<List<Review>> showReviews() async {
+    var jwt = _authenticationService.jwt;
+    if (jwt == null) throw Exception("Permission denied. Please authenticate!");
+
+    var _endpointString = '$endpoint/api/reviews/';
+
+    var response = await client.get(
+      _endpointString,
+      headers: <String, String>{
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $jwt'
+      },
+    );
+    if (response.statusCode == 200) {
+      List<Review> reviews = List<Review>();
+      print(response.body);
+      var parsed = (json.decode(response.body)['reviews']) as List<dynamic>;
+      for (var review in parsed) {
+        reviews.add(Review.fromJson(review));
+      }
+      return reviews;
+    } else {
+      return [];
+    }
   }
 }
